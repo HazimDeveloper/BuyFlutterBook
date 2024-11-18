@@ -9,8 +9,8 @@ async function createBill(customerData) {
         billPriceSetting: 1,
         billPayorInfo: 1,
         billAmount: 3500,
-        billReturnUrl: window.location.origin + '/success.html',
-        billCallbackUrl: window.location.origin + '/callback.html',
+        billReturnUrl: window.location.origin + 'https://hazimdeveloper.github.io/BuyFlutterBook/success.html',
+        billCallbackUrl: window.location.origin + 'https://hazimdeveloper.github.io/BuyFlutterBook/',
         billExternalReferenceNo: 'FLUTTER_' + Date.now(),
         billTo: customerData.name,
         billEmail: customerData.email,
@@ -31,7 +31,7 @@ async function createBill(customerData) {
         // Store customer data before redirect
         localStorage.setItem('customerData', JSON.stringify(customerData));
 
-        const response = await fetch('https://dev.toyyibpay.com/index.php/api/createBill', {
+        const response = await fetch('https://toyyibpay.com/index.php/api/createBill', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -98,7 +98,7 @@ async function handlePayment(event) {
 
         // Redirect to ToyyibPay payment page
         if (billCode) {
-            window.location.href = `https://dev.toyyibpay.com/${billCode}`;
+            window.location.href = `https://toyyibpay.com/${billCode}`;
         } else {
             throw new Error('Failed to create bill');
         }
