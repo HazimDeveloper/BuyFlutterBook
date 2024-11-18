@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Flutter Development - HazimDev Course</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script type="text/javascript">
+    (function() {
+        // Replace with your EmailJS public key
+        emailjs.init("WOIOhv2Ev44peCAjc");
+    })();
+</script>
+    <script src="bill_toyyib_pay.js" ></script>
+      <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            background: linear-gradient(180deg, #eff6ff 0%, #ffffff 100%);
+            color: var(--text-dark);
+            font-weight: 300;
+        }
+        .telegram-invite {
+        margin-top: 20px;
+        text-align: center;
+        padding: 20px;
+        background: #f8fafc;
+        border-radius: 8px;
+    }
+
+    .telegram-invite p {
+        margin-bottom: 15px;
+    }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            letter-spacing: -0.025em;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            margin-bottom: 20px;
+            line-height: 1.2;
+            font-weight: 700;
+        }
+
+        .hero span {
+            color: var(--primary);
+            display: block;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.25rem);
+            color: var(--text-light);
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            color: var(--primary);
+            background: transparent;
+        }
+
+        .btn-secondary:hover {
+            color: var(--primary-dark);
+        }
+
+        /* Features Grid */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card h3 {
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.25rem;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Course Modules */
+        .modules {
+            background: white;
+            padding: 60px;
+            border-radius: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 60px 0;
+        }
+
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .module-card {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .module-card:hover {
+            background: #f8fafc;
+        }
+
+        .module-icon {
+            background: #eff6ff;
+            padding: 15px;
+            border-radius: 12px;
+            color: var(--primary);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .modal-header h3 {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        .close {
+            font-size: 28px;
+            font-weight: 300;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: var(--text-dark);
+        }
+
+        /* Form Styles */
+        .input-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            background: transparent;
+        }
+
+        .input-group label {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+            transition: all 0.3s ease;
+            padding: 0 5px;
+            background: white;
+            pointer-events: none;
+        }
+
+        .input-group input:focus,
+        .input-group input:valid {
+            border-color: var(--primary);
+        }
+
+        .input-group input:focus + label,
+        .input-group input:valid + label {
+            top: 0;
+            font-size: 14px;
+            color: var(--primary);
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 5px solid #eff6ff;
+            border-bottom-color: var(--primary);
+            border-radius: 50%;
+            animation: rotation 1s linear infinite;
+        }
+
+        @keyframes rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 60px 0;
+            }
+
+            .modules {
+                padding: 30px;
+            }
+
+            .btn-group {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+
+        .pricing {
+        text-align: center;
+        padding: 60px 0;
+    }
+
+    .price-card {
+        background: white;
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        margin: 40px auto;
+        transition: all 0.3s ease;
+    }
+
+    .price-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .price {
+        font-size: 2.5rem;
+        color: var(--primary);
+        font-weight: 700;
+        margin: 20px 0;
+    }
+
+    .features-list {
+        list-style: none;
+        text-align: left;
+        margin: 30px 0;
+    }
+
+    .features-list li {
+        margin: 15px 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 300;
+    }
+
+    .features-list li::before {
+        content: "✓";
+        color: #22c55e;
+        font-weight: bold;
+    }
+
+    /* Floating animation */
+    .floating {
+        animation: floating 3s ease-in-out infinite;
+    }
+
+    @keyframes floating {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay">
+        <div class="loader"></div>
+    </div>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1 data-aos="fade-up">Master Flutter Development <span>in 30 Days</span></h1>
+            <p data-aos="fade-up" data-aos-delay="100">Transform from complete beginner to confident app developer</p>
+            <div class="btn-group" data-aos="fade-up" data-aos-delay="200">
+                <!-- <button class="btn btn-primary" onclick="openModal()">Get Started Now - RM35 →</button> -->
+                <button class="btn btn-primary" onclick="window.location.href = 'https://docs.google.com/forms/d/e/1FAIpQLSfQ368XbPTye8EB9IoToT8qj2OwhO1SAaxYdaPWRMA3F-gTuQ/viewform';">Get Started Now - RM35 →</button>
+                <a href="https://t.me/+1bFt1Jr3GFs3ZGM1" class="btn btn-secondary">Join Our Community 👥</a>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <div class="features">
+            <div class="feature-card" data-aos="fade-up">
+                <h3>30-Day Learning Path</h3>
+                <p>Structured daily lessons from basics to building real apps</p>
+            </div>
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>Real Projects</h3>
+                <p>Build a professional portfolio app from scratch</p>
+            </div>
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                <h3>Beginner Friendly</h3>
+                <p>No prior coding experience needed</p>
+            </div>
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                <h3>Personal Support</h3>
+                <p>Join our active Telegram community for help</p>
+            </div>
+        </div>
+
+        <!-- Course Modules -->
+        <div class="modules">
+            <h2 class="text-center mb-8">What You'll Learn</h2>
+            <div class="module-grid">
+                <div class="module-card" data-aos="fade-right">
+                    <div class="module-icon">📱</div>
+                    <div>
+                        <h3>Week 1: Setup & Basics</h3>
+                        <p>Get started with Flutter development environment</p>
+                    </div>
+                </div>
+                <div class="module-card" data-aos="fade-left">
+                    <div class="module-icon">🎨</div>
+                    <div>
+                        <h3>Week 2: UI Design</h3>
+                        <p>Create beautiful, responsive user interfaces</p>
+                    </div>
+                </div>
+                <div class="module-card" data-aos="fade-right">
+                    <div class="module-icon">⚡</div>
+                    <div>
+                        <h3>Week 3: Interactivity</h3>
+                        <p>Add dynamic features and state management</p>
+                    </div>
+                </div>
+                <div class="module-card" data-aos="fade-left">
+                    <div class="module-icon">🚀</div>
+                    <div>
+                        <h3>Week 4: Polish & Deploy</h3>
+                        <p>Animations, testing, and app deployment</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pricing">
+            <h2 data-aos="fade-up">Ready to Start Your Flutter Journey?</h2>
+            <div class="price-card" data-aos="zoom-in">
+                <h3>Complete Course Package</h3>
+                <div class="price">RM35</div>
+                <ul class="features-list">
+                    <li>✓ Complete Course Access</li>
+                    <li>✓ Telegram Community Support</li>
+                    <li>✓ Project Source Code</li>
+                    <li>✓ Lifetime Updates</li>
+                </ul>
+                <!-- <button class="btn btn-primary floating" onclick="openModal()">Get Started Today →</button> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Complete Your Purchase</h3>
+                <span class="close">&times;</span>
+            </div>
+            <form id="paymentForm" onsubmit="handlePayment(event)">
+                <div class="input-group">
+                    <input type="text" id="name" required>
+                    <label for="name">Full Name</label>
+                </div>
+                <div class="input-group">
+                    <input type="email" id="email" required>
+                    <label for="email">Email Address</label>
+                </div>
+                <div class="input-group">
+                    <input type="tel" id="phone" required>
+                    <label for="phone">Phone Number</label>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    Pay RM35
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Initialize AOS
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 1000,
+                once: true,
+                offset: 100
+            });
+
+            // Remove loading overlay
+            setTimeout(() => {
+                const loader = document.querySelector('.loading-overlay');
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 500);
+            }, 1000);
+        });
+
+        // Modal functionality
+        const modal = document.getElementById('paymentModal');
+        const closeBtn = document.querySelector('.close');
+
+        function openModal() {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
+
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add hover effects for cards
+        const cards = document.querySelectorAll('.feature-card, .module-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-5px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Success - Flutter Course</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="bill_toyyib_pay.js"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --success: #22c55e;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(180deg, #eff6ff 0%, #ffffff 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .success-container {
+            max-width: 600px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .success-header {
+            background: var(--success);
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .success-header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .success-header p {
+            opacity: 0.9;
+        }
+
+        .success-content {
+            padding: 30px;
+        }
+
+        .order-details {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .order-details p {
+            margin: 10px 0;
+            color: var(--text-dark);
+        }
+
+        .next-steps {
+            margin: 30px 0;
+        }
+
+        .next-steps h2 {
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .next-steps ol {
+            padding-left: 20px;
+        }
+
+        .next-steps li {
+            margin: 15px 0;
+            color: var(--text-light);
+        }
+
+        .telegram-button {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-align: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .telegram-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
+        }
+
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 5px solid #eff6ff;
+            border-bottom-color: var(--primary);
+            border-radius: 50%;
+            animation: rotation 1s linear infinite;
+        }
+
+        @keyframes rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error-container {
+            display: none;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .error-container h2 {
+            color: #ef4444;
+            margin-bottom: 15px;
+        }
+
+        .contact-support {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .social-links {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .social-links p {
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+
+        .social-links a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .success-container {
+                margin: 10px;
+            }
+
+            .success-header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <div id="loadingSection" class="loading">
+            <div class="loader"></div>
+        </div>
+
+        <div id="successSection" style="display: none;">
+            <div class="success-header">
+                <h1>🎉 Payment Successful!</h1>
+                <p>Thank you for purchasing the Flutter Course</p>
+            </div>
+
+            <div class="success-content">
+                <div class="order-details">
+                    <p><strong>Order ID:</strong> <span id="orderId">Loading...</span></p>
+                    <p><strong>Email:</strong> <span id="customerEmail">Loading...</span></p>
+                    <p><strong>Purchase Date:</strong> <span id="purchaseDate">Loading...</span></p>
+                </div>
+
+                <div class="next-steps">
+                    <h2>Next Steps:</h2>
+                    <ol>
+                        <li>Check your email for the course materials</li>
+                        <li>Join our Telegram community for support</li>
+                        <li>Start your Flutter development journey!</li>
+                    </ol>
+                </div>
+
+                <a href="https://t.me/+1bFt1Jr3GFs3ZGM1" class="telegram-button">
+                    Join Our Telegram Community 👥
+                </a>
+
+                <div class="social-links">
+                    <p>Follow for updates:</p>
+                    <p>
+                        <a href="https://www.tiktok.com/@hazimdev" target="_blank">TikTok: @hazimdev</a> | 
+                        <a href="https://www.instagram.com/hazimkhai__" target="_blank">Instagram: @hazimkhai__</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="errorSection" class="error-container">
+            <h2>Oops! Something went wrong</h2>
+            <p>We couldn't process your payment confirmation.</p>
+            <p>Please contact support if you've been charged.</p>
+            <div class="contact-support">
+                <p>Email: support@example.com</p>
+                <p>Telegram: @hazimdev</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check payment status after page loads
+            setTimeout(checkPaymentStatus, 1000);
+        });
+
+        function showError() {
+            document.getElementById('loadingSection').style.display = 'none';
+            document.getElementById('errorSection').style.display = 'block';
+        }
+
+        function showSuccess(orderId, email) {
+            document.getElementById('loadingSection').style.display = 'none';
+            document.getElementById('successSection').style.display = 'block';
+            
+            // Update order details
+            document.getElementById('orderId').textContent = orderId;
+            document.getElementById('customerEmail').textContent = email;
+            document.getElementById('purchaseDate').textContent = new Date().toLocaleDateString();
+        }
+
+        // Override the showSuccessMessage function from bill_toyyib_pay.js
+        function showSuccessMessage() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const orderId = urlParams.get('order_id') || urlParams.get('billcode');
+            
+            try {
+                const customerData = JSON.parse(localStorage.getItem('customerData'));
+                if (customerData) {
+                    showSuccess(orderId, customerData.email);
+                } else {
+                    showError();
+                }
+            } catch (error) {
+                console.error('Error showing success message:', error);
+                showError();
+            }
+        }
+    </script>
+</body>
+</html>
