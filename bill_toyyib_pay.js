@@ -9,7 +9,7 @@ async function createBill(customerData) {
         billPriceSetting: 1,
         billPayorInfo: 1,
         billAmount: 3500,
-        billReturnUrl: window.location.origin + 'https://hazimdeveloper.github.io/BuyFlutterBook/success.html',
+        billReturnUrl: window.location.origin + 'https://hazimdeveloper.github.io/BuyFlutterBook/',
         billCallbackUrl: window.location.origin + 'https://hazimdeveloper.github.io/BuyFlutterBook/',
         billExternalReferenceNo: 'FLUTTER_' + Date.now(),
         billTo: customerData.name,
